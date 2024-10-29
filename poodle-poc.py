@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
 import binascii
 import sys
 import re
@@ -12,16 +8,11 @@ from Crypto import Random
 
 """
     Implementation of AES-256 with CBC cipher mode
-    cipher = plaintext + hmac + padding
-    IV and KEY are random
-    there is no handshake (no need) 
+    Cipher = plaintext + hmac + padding
 """
 
 IV = Random.new().read(AES.block_size)
 KEY = Random.new().read(AES.block_size)
-
-# generate random key and iv
-
 
 def randkey():
     global IV
@@ -235,6 +226,7 @@ def run(SECRET):
                     sys.stdout.flush()
                     break
         print('')
+        # Print out the secret in reverse order as decryption was done in reverse order
         secret = secret[::-1]
         v.append(('').join(secret))
         secret = []
